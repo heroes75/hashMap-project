@@ -23,13 +23,56 @@ class LinkedList {
 
         tmp.next = new Node(value)
     }
+
+    size() {
+        let tmp = this.head;
+        let size = 0;
+        if(this.head === undefined) return size
+        if (this.head !== undefined) size++
+        while (tmp.next !== null) {
+            size++;
+            tmp = tmp.next;
+        }
+        
+        return size
+    }
+
+    contains(key) {
+        let tmp = this.head;
+        let pointer = 0
+        while(pointer < this.size()) {
+            if(tmp.value.key === key) {
+                return true
+            }
+            tmp = tmp.next;
+            pointer++
+        }
+        return false
+    }
+
+    modifyBucket(key, value) {
+        let tmp = this.head;
+        let pointer = 0;
+        while(pointer < this.size()) {
+            if(tmp.value.key === key) {
+                tmp.value.value = value
+            }
+            tmp = tmp.next;
+            pointer++
+        }
+    }
 }
 
 export default LinkedList;
 
-//let list = new LinkedList()
+let list = new LinkedList()
 
 //list.append("value");
-//list.append("value1");
-//list.append("value2");
-//console.log(list);
+list.append({key: "dasdasd", value: "1234"});
+list.append({key: "qwerty", value: "56789"});
+list.size();
+list.modifyBucket("dasdasd", "new1234")
+
+console.log(list.contains("dasdasd"));
+
+console.log(list);
