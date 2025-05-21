@@ -61,6 +61,43 @@ class LinkedList {
             pointer++
         }
     }
+
+    toArray() {
+        let tmp = this.head;
+        let arr = [];
+        while (tmp.next !== null) {
+            arr.push(tmp.value);
+            tmp = tmp.next;
+        }
+
+        arr.push(tmp.value);
+        return arr
+    }
+
+    find(key) {
+        let tmp = this.head;
+        let pointer = 0;
+        while(pointer < this.size()) {
+            if(tmp.value.key === key) {
+                return tmp.value
+            }
+            tmp = tmp.next;
+            pointer++
+        }
+        return null
+    }
+
+    remove(index) {
+        let tmp = this.head;
+        let pointer = 0;
+
+        while (pointer < index - 1) {
+            tmp = tmp.next;
+            pointer++
+        }
+
+        tmp = tmp.next.next
+    }
 }
 
 export default LinkedList;
@@ -74,5 +111,6 @@ list.size();
 list.modifyBucket("dasdasd", "new1234")
 
 console.log(list.contains("dasdasd"));
+console.log(list.toArray());
 
 console.log(list);
