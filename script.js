@@ -22,6 +22,10 @@ class HashMap {
 
     bucket(key) {
         let h = this.hash(key);
+        if (h < 0 || h >= this.bs.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
         this.bs[h] = this.bs[h] ||new LinkedList()
 
         //console.log(this.bs[h]);
@@ -49,13 +53,14 @@ class HashMap {
         b.append({key, value})
 
         if(this.bs.filter(el => el instanceof LinkedList).length > this.capacity * this.loadFactor) {
-            this.capacity *= 2;
+            //this.capacity = this.capacity * 2 - this.capacity;
             let newArray = new Array(this.capacity);
-            console.log("in filter", newArray);
-            newArray = [...this.bs];
-            console.log("in filter", newArray.length);
-            this.bs = newArray;
-            console.log("in filter", newArray);
+            //console.log("in filter", newArray);
+            //newArray = [...this.bs];
+            //console.log("in filter", newArray.length);
+            this.bs = this.bs.concat(newArray);
+            this.capacity *= 2;
+            console.log("in filter", this.bs);
             
         }
     }
@@ -67,7 +72,7 @@ const hash = new HashMap(0.75, 16);
 
 
 hash.set("ken", 23);
-hash.set("keny", 23);
+//hash.set("keny", 23);
 hash.set("keny", 230);
 hash.set("kent", 23);
 hash.set("konan", 23);
@@ -75,7 +80,7 @@ hash.set("kany", 23);
 hash.set("kader", 23);
 hash.set("frederic", 23);
 hash.set("hamed", 23);
-hash.set("ismael", 23);
+//hash.set("ismael", 23);
 hash.set("ismael", 231);
 hash.set("rama", 232);
 console.log(hash.bs[3]);
@@ -90,9 +95,10 @@ hash.set('grape', 'purple')
  hash.set('hat', 'black')
  hash.set('ice cream', 'white')
  hash.set('jacket', 'blue')
- hash.set('kite', 'pink')
- hash.set('lion', 'golden')
+ //hash.set('kite', 'pink')
+ //hash.set('lion', 'golden')
 
+console.log(hash.bs);
 console.log(hash.bs.length);
 console.log(hash.bs.filter(el => el instanceof LinkedList).length);
 
