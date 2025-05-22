@@ -91,12 +91,30 @@ class LinkedList {
         let tmp = this.head;
         let pointer = 0;
 
+        if(index === 0) {
+            this.head = this.head.next;
+            if(this.head === null) this.head = undefined;
+            return
+        }
+
         while (pointer < index - 1) {
             tmp = tmp.next;
             pointer++
         }
 
-        tmp = tmp.next.next
+        tmp.next = tmp.next.next
+        if(this.head === null) this.head = undefined
+    }
+
+    findIndex(key) {
+        let tmp = this.head;
+        let index = 0;
+        while(index < this.size()) {
+            if(tmp.value.key === key) return index;
+            tmp = tmp.next;
+            index++;
+        }
+        return null
     }
 }
 
@@ -112,5 +130,7 @@ list.modifyBucket("dasdasd", "new1234")
 
 console.log(list.contains("dasdasd"));
 console.log(list.toArray());
+console.log(list.remove(1));
+console.log(list.remove(0));
 
 console.log(list);
