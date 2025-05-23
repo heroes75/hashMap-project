@@ -41,7 +41,7 @@ class LinkedList {
         let tmp = this.head;
         let pointer = 0
         while(pointer < this.size()) {
-            if(tmp.value.key === key) {
+            if(tmp.value.key === key || tmp.value === key) {
                 return true
             }
             tmp = tmp.next;
@@ -110,7 +110,7 @@ class LinkedList {
         let tmp = this.head;
         let index = 0;
         while(index < this.size()) {
-            if(tmp.value.key === key) return index;
+            if(tmp.value.key === key || tmp.value === key) return index;
             tmp = tmp.next;
             index++;
         }
